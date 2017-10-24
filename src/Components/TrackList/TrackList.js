@@ -1,8 +1,8 @@
 import React from 'react';
 import './TrackList.css';
-import Track from '../Track/Track'
+import Track from '../Track/Track';
 
-export class TrackList extends React.Components() {
+class TrackList extends React.Component {
     render(){
          return(
             <div className="TrackList">
@@ -16,3 +16,4 @@ export class TrackList extends React.Components() {
         );
     }
 }
+export default TrackList;

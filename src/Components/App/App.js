@@ -2,11 +2,11 @@ import React from 'react';
 import './App.css';
 import SearchBar from '../SearchBar/SearchBar';
 import SearchResults from '../SearchResults/SearchResults';
-import Playlist from '../Playlist/Playlist';
+import Playlist from '../Playlist/PlayList';
 
 
 
- class App extends React.Component() {
+class App extends React.Component {
      constructor(props) {
          super(props);
          this.state = {
