@@ -2,14 +2,15 @@ body,
 html,
 #root {
   height: 100%;
+  background-color: black;
 }
 
 html {
-  font-size: 18px;
+  font-size: 15px;
 }
 
 h1 {
-  padding: .77rem 0;
+  padding: 1rem 0;
   background-color: #010c3f;
   text-align: center;
   font-family: 'Poppins', sans-serif;
@@ -51,3 +52,4 @@ h2 {
     flex-direction: column;
   }
 }
+

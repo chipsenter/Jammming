@@ -24,7 +24,7 @@ class App extends React.Component {
 
     addTrack(track) {
         let playlist = this.state.playlistTracks;
-        let isInPlaylist = playlist.find(is => is.id === track.id); //check if song is in playlist?
+        let isInPlaylist = playlist.find(is => is.id === track.id);
         if (!isInPlaylist) {
             playlist.push(track);
             this.setState({playlistTracks: playlist});
