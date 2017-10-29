@@ -1,5 +1,5 @@
 const CLIENT_ID = 'a6a6f5fe1a6e4ddf9992e1444045483d';
-const REDIRECT_URI = 'http://jamming_jfl.surge.sh/';
+const REDIRECT_URI = 'http://jamming_jfl.surge.sh/';        //http://jamming_jfl.surge.sh/
 let accessToken;
 
 const Spotify = {
@@ -23,30 +23,30 @@ const Spotify = {
         }
     },
     search(term) {
-        const searchURI = `https://api.spotify.com/v1/search?type=track&q=${term}`;
-        const accessToken = Spotify.getAccessToken();
-        const params = {
-            headers: {Authorization: `Bearer ${accessToken}`}
-        }
-        console.log(searchURI)
-        return fetch(searchURI, params)
-        .then(response => {
+        accessToken = Spotify.getAccessToken();
+        const fetchURL = `https://api.spotify.com/v1/search?type=track&q=${term}`;
+        const headers = {headers: {Authorization: `Bearer  ${accessToken}`}};
+        return fetch(fetchURL, headers).then(response => {
+          if (response.ok) {
             return response.json();
-        })
-        .then(json => {
-            if (!json || !json.tracks || !json.tracks.items) return [];
-            else {
-                const tracks = json.tracks.items;
-                return tracks.map(track => ({
-                    id: track.id,
-                    name: track.name,
-                    artist: track.artists[0].name,
-                    album: track.album.name,
-                    URI: track.uri
-                }))
-            }
-        })
-    },
+          }
+          throw new Error('Request failed!');
+        }, networkError => console.log(networkError.message)
+        ).then(jsonResponse => {
+            if (jsonResponse.tracks.items) {
+              return jsonResponse.tracks.items.map(track => {
+                return {
+                  id: track.id,
+                  name: track.name,
+                  artist: track.artists[0].name,
+                  album: track.album.name,
+                  uri: track.uri,
+                };
+              })
+            } else return [];
+          });
+      },
+      
     savePlaylist(name, trackURIs) {
         if (!name || !trackURIs) return;
         const accessToken = Spotify.getAccessToken();
@@ -73,8 +73,8 @@ const Spotify = {
             .then(jsonResponse => {
               console.log(jsonResponse)
               playlistID = jsonResponse.id;
-              console.log(`https://api.spotify.com/v1/users/${userID}/playlists/${playlistID}/tracks`);
-              console.log(JSON.stringify(addTracksHeaders));
+              //console.log(`https://api.spotify.com/v1/users/${userID}/playlists/${playlistID}/tracks`);
+              //console.log(JSON.stringify(addTracksHeaders));
               return fetch(`https://api.spotify.com/v1/users/${userID}/playlists/${playlistID}/tracks`, addTracksHeaders)
             });
         });
