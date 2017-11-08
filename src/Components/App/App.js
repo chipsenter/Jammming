@@ -24,8 +24,12 @@ class App extends Component {
      }
 
     addTrack(track) {
+        /*let updatedPlaylistTracks = this.state.playlistTracks.concat(track);
+        this.setState({
+          playlistTracks: updatedPlaylistTracks
+        });*/
         let playlist = this.state.playlistTracks;
-        let isInPlaylist = playlist.find(is => is.id === track.id);
+        let isInPlaylist = playlist.find(currentTrack => currentTrack.id === track.id);
         if (!isInPlaylist) {
             playlist.push(track);
             this.setState({playlistTracks: playlist});

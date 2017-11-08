@@ -18,7 +18,7 @@ class PlayList extends Component {
             <input 
                 id='playlistName'
                 onChange={this.handleNameChange}                
-                defaultValue={this.props.playlistName}/>
+                value={this.props.playlistName}/>
             <TrackList 
                 tracks={this.props.playlistTracks} 
                 onRemove={this.props.onRemove}/>
