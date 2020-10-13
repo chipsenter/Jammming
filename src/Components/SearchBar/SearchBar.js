@@ -34,6 +34,7 @@ class SearchBar extends Component {
               id='searchBar'
               placeholder="Enter A Song, Album, or Artist"
               onChange={this.handleTermChange}
+              onfocus={this.value=''}
               onKeyPress={this.handleKeyPress}
               defaultValue={this.props.searchTerm} />
             <a onClick={this.search}>SEARCH</a>
